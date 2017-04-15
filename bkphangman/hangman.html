@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/sonir/Desktop/HomeWork/hangman/Hangman.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>
+<audio autoplay><source src="assets/sound/backgroundmusic.mp3" type="audio/mpeg">
+</audio>
+<!-- Heading image -->
+	<div  style="width: 100%;border-style: solid; border-color: gray; float: top;">
+	<img src="assets/images/topheader.jpg" width="100%" height="100px"></div>
+
+<!-- left image panel -->
+	<div style="width: 100%">
+		<div style="width: 49.5%;border-style: solid; border-color: gray; float: left;background-color: teal;">
+		<center>	<img src="assets/images/animated/hmlogo.gif" style="width:100%;" alt="image of theif"></center>
+<!-- Right Game Panel -->
+		</div>
+		<div style="width:50%;border-style: solid; border-color: gray; float:right; background-color: red; color:yellow;" >
+			<div id="myid" style="width: 99%;padding-left: 5px; padding-top: 15px; padding-bottom: 15px; "><center><h1>Hint: A fruit</h1></center></div> 
+			<div style="width: 99%; background-color: darkblue; color: white;padding-left: 5px; padding-top: 15px; padding-bottom: 15px;">
+			<center>
+			<h2>Guess Magic Word?</h2> 
+			<input type="text" id="fname" onkeyup="myFunction(event)">
+			</center>
+
+<!-- Score Panel -->
+			</div>
+
+			<div id="score1" style="background-color: orange; color: brown;padding-left: 5px; padding-top: 15px; padding-bottom: 15px;"><center><h2><br></h2></center></div>
+
+			<div id="loss1" style="background-color: blue; color: white;padding-left: 5px; padding-top: 15px; padding-bottom: 15px;"><center><h2></h2><br></center></div>
+
+			<div id="try1" style="background-color: lightblue; color: brown;padding-left: 5px; padding-top: 15px; padding-bottom: 15px;"><center><h2><br></h2></center></div>
+
+		    </div>
+	</div>
+
+
+<!--Starting Script -->
+
+<script>
+ // generating randome number between 0 and 5 it given outside the function to make it global
+  var rnd_no = Math.floor((Math.random() * 5));
+  var scoreword = 0;
+  var lets_try = 0;  
+  var y=["APPLE","ORANGE","GRAPE","PEACH","GUAVA"];
+  var temp=y[rnd_no].length;
+  var tx ="Hint: A fruit with "+temp;
+  var scorecard = 0;
+  document.getElementById("myid").innerHTML="<center><h1>"+tx+" Letters</h1></center>";
+  //console.log(document.tx);
+
+
+function myFunction(event) {
+
+	console.log(event);
+// storing input value
+    var input_val1 = document.getElementById("fname");
+
+// Converting to uppercase
+    input_val1.value = input_val1.value.toUpperCase();
+
+// taken an intermediate variable to find the value inputted
+    var xval=input_val1.value;
+
+// storing the length of the value inputted by the user
+    var lx=xval.length;
+
+// storing the quiz word
+   	var quiz_name=y[rnd_no];
+
+// storing the length of quiz word
+	var quiz_length=quiz_name.length;
+		
+// Restricting the length of input to length of quiz word
+ // if (quiz_length=lx){return false;}
+// finding the comparable charecter from input
+	var comp_char=xval.charAt(lx-1);
+// finding the comparable charecter from quiz word
+    var quiz_letter=quiz_name.charAt(lx-1);
+    var str = input_val1.value ;
+
+document.getElementById("score1").innerHTML = "<center><h2>Score:"+scorecard+"</h2></center>";
+
+document.getElementById("try1").innerHTML = "<center><h2>Tries:"+lets_try+"</h2></center>";
+
+ //Limit the length of the input
+     if (quiz_length <= lx-1)
+     {
+          	str = str.substring(0, str.length - 1);
+        	document.getElementById("fname").value = str;
+       		return false;
+     }
+
+     if (quiz_letter==comp_char)
+	     {
+	     	scoreword=scoreword+1;
+	   //console.log(scoreword.value,quiz_length);
+
+					// image change
+
+					if (input_val1.value==quiz_name)
+					{
+			//	alert("You Win");
+			
+						scorecard = scorecard++;
+document.getElementById("score1").innerHTML = "<center><h2>Score:"+scorecard+"</h2></center>";
+
+				 		 exitChk();
+				 		 scoreword = 0;
+						input_val1.value="";
+
+					}
+					
+					
+	     }
+     else {
+     	 lets_try=lets_try+1;
+	     	if (lets_try==4)
+		     	{
+	document.getElementById("loss1").innerHTML = "<center><h2>Magic Word:"+quiz_name+"</h2></center>";
+		     		lets_try=0;
+		     		scoreword=0;
+		     		alert(quiz_name);
+		    // image change
+		
+		     		alert("You Lost it");
+					document.getElementById("loss1").innerHTML = "                    ";
+		        	exitChk();
+		     	}
+
+	     	else
+		     	{
+		     		
+		
+
+		//           image change
+		
+					     
+		     		var str = input_val1.value ;
+		     		 str = str.substring(0, str.length - 1);
+		        	document.getElementById("fname").value = str;
+		      		return false;
+		     	}
+     }
+
+
+/*
+    console.log(input_val1.value);
+    console.log(xval);
+    console.log(lx);
+    console.log(quiz_length);
+    console.log(quiz_name);
+    console.log(comp_char);
+    console.log(quiz_letter);
+    console.log(str);
+    console.log(scoreword);
+    console.log(lets_try);
+*/
+}
+// function to check exit or continue for the user
+function exitChk()
+		{
+			if(confirm("Exit Game?"))
+				        	   {
+				        		if (confirm("Close Window?"))
+				        				{
+			    						close();
+			  							}
+
+			  					}
+			  				else
+			  					{  window.location.reload();
+			  					}
+		}
+
+</script>
+
+
+<!-- <embed loop="true" src="assets/sound/backgroundmusic.mp3" hidden="true" type="audio/quicktime">-->
+	
+</embed>
+</body></html>

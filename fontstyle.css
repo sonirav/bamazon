@@ -1,0 +1,12 @@
+/* Font Test */
+#font1{
+	font-family: Vardana,"New Times Roman",'Indie Flower';
+}
+
+#font2{
+	font-family: Pacifico, cursive;
+}
+
+#button:hover{
+	box-shadow: 10px 10px 30px 150px #888888;
+}
