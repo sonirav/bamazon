@@ -1,0 +1,16 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Homework to Create Amazon like store with different login channels and previllages",
+  "main": "bamazon.js",
+  "scripts": {
+    "test": "node bm"
+  },
+  "author": "Ravinder Soni",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^3.0.6",
+    "request": "^2.81.0"
+  }
+}
